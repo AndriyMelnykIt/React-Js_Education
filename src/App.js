@@ -1,17 +1,35 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import PostList from './Components/PostList';
 import PostForm from './Components/PostForm';
+import PostFilter from './Components/PostFilter';
+import MyModal from './Components/UI/MyModal/MyModal';
+import MyButton from './Components/UI/button/MyButton';
 
 function App () {
 	const [posts, setPosts] = useState ([
-		{id: 1, title: 'JavaScript', body: 'Description'},
-		{id: 2, title: 'JavaScript 2', body: 'Description'},
-		{id: 3, title: 'JavaScript 3', body: 'Description'},
+		{id: 1, title: 'Андрій', body: 'Мельник'},
+		{id: 2, title: 'Маріанна', body: 'Чіх'},
+		{id: 3, title: 'Роман', body: 'Свищ'},
 	])
+
+	const [filter, setFilter] = useState ({sort: '', query: ''});
+	const [modal, setModal] = useState (false);
+
+	const sortedPosts = useMemo (() => {
+		if (filter.sort) {
+			return [...posts].sort ((a, b) => a[filter.sort].localeCompare (b[filter.sort]))
+		}
+		return posts;
+	}, [filter.sort, posts]);
+
+	const sortedAndSearchedPosts = useMemo (() => {
+		return sortedPosts.filter (post => post.title.toLowerCase ().includes (filter.query.toLowerCase ()))
+	}, [filter.query, sortedPosts])
 
 	const createPost = (newPost) => {
 		setPosts ([...posts, newPost])
+		setModal (false)
 	}
 
 	const removePost = (post) => {
@@ -20,12 +38,18 @@ function App () {
 
 	return (
 		<div className="App">
-			<PostForm create={createPost} />
-			{posts.length !== 0
-				? <PostList remove={removePost} posts={posts} title="Пости про Js" />
-				: <h1 style={{textAlign: 'center'}}>Пости не знайдені</h1>
-			}
-
+			<MyButton style={{marginTop: 30}} onClick={() => setModal (true)}>
+				Створити користувача
+			</MyButton>
+			<MyModal visible={modal} setVisible={setModal}>
+				<PostForm create={createPost} />
+			</MyModal>
+			<hr style={{margin: '15px 0'}} />
+			<PostFilter
+				filter={filter}
+				setFilter={setFilter}
+			/>
+			<PostList remove={removePost} posts={sortedAndSearchedPosts} title="Пости про Js" />
 		</div>
 	);
 }
