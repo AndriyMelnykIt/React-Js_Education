@@ -8,9 +8,9 @@ import MyButton from './Components/UI/button/MyButton';
 
 function App () {
 	const [posts, setPosts] = useState ([
-		{id: 1, title: 'Андрій', body: 'Мельник'},
-		{id: 2, title: 'Маріанна', body: 'Чіх'},
-		{id: 3, title: 'Роман', body: 'Свищ'},
+		{id: 1, title: '3rw3r', body: 'rgd'},
+		{id: 2, title: 'q2eq', body: 'w3rw3'},
+		{id: 3, title: 'gdrgdr', body: 'rge'},
 	])
 
 	const [filter, setFilter] = useState ({sort: '', query: ''});
