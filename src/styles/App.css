@@ -20,6 +20,7 @@
     border: 2px solid teal;
     margin-top: 15px;
     padding: 15px;
+    background: bisque;
 }
 .post-enter {
     transform: translateX(-350px);
@@ -37,4 +38,20 @@
 .post-exit-active {
     transform: translateX(-350px);
     transition: all 500ms ease-in;
+}
+
+.page__wrapper {
+    margin-top: 30px;
+    display: flex;
+}
+
+.page {
+    padding: 10px;
+    border: 1px solid teal;
+    cursor: pointer;
+}
+
+.page__current {
+    border: 2px solid orange;
+    font-weight: bold;
 }
