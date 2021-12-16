@@ -4,8 +4,7 @@ import About from '../pages/About';
 import Posts from '../pages/Posts';
 import Error from '../pages/Error';
 
-const AppRouter = () => {
-	return (
+const AppRouter = () => (
 		<div>
 			<Routes>
 				<Route>
@@ -16,6 +15,5 @@ const AppRouter = () => {
 			</Routes>
 		</div>
 	);
-};
 
 export default AppRouter;
